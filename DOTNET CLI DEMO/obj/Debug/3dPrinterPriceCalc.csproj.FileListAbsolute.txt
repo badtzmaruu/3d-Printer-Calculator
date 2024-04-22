@@ -1,7 +1,0 @@
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\bin\Debug\3dPrinterPriceCalc.exe.config
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\bin\Debug\3dPrinterPriceCalc.exe
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\bin\Debug\3dPrinterPriceCalc.pdb
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\obj\Debug\3dPrinterPriceCalc.csproj.AssemblyReference.cache
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\obj\Debug\3dPrinterPriceCalc.csproj.CoreCompileInputs.cache
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\obj\Debug\3dPrinterPriceCalc.exe
-C:\Users\rjjou\OneDrive - belgiumcampus.ac.za\Documents\GitHub\3d-Printer-Calculator\3dPrinterPriceCalc\obj\Debug\3dPrinterPriceCalc.pdb
