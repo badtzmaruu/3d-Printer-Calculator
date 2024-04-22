@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/3d-Printer-Calculator.iml" filepath="$PROJECT_DIR$/.idea/3d-Printer-Calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/threed_printer_calculator.iml" filepath="$PROJECT_DIR$/threed_printer_calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/threed_printer_calculator_android.iml" filepath="$PROJECT_DIR$/android/threed_printer_calculator_android.iml" />
     </modules>
   </component>
 </project>
