@@ -1,0 +1,7 @@
+export csv			generate quote/invoice
+price for job			whats your address? whats your clients address?
+printers			client name, mailto, export to pdf, text file
+filament
+invoice info
+
+filament ^ 
