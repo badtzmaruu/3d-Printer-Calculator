@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController upgradesPriceController = TextEditingController();
   final TextEditingController annualRepairCostsController = TextEditingController();
   final TextEditingController printerLifespanController = TextEditingController();
+  final TextEditingController postProcessingController = TextEditingController();
   final TextEditingController wasteWeightController = TextEditingController();
   final TextEditingController failedPrintPercentageController = TextEditingController();
   final TextEditingController taxPercentageController = TextEditingController();
@@ -57,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double upgradesPrice = double.parse(upgradesPriceController.text);
     double annualRepairCosts = double.parse(annualRepairCostsController.text);
     double printerLifespan = double.parse(printerLifespanController.text);
+    double postProcessing = double.parse(postProcessingController.text);
     double wasteWeight = double.parse(wasteWeightController.text);
     double failedPrintPercentage = double.parse(failedPrintPercentageController.text);
     double taxPercentage = double.parse(taxPercentageController.text);
@@ -70,8 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
     double wasteCost = (materialCost / materialUsed) * wasteWeight;
     double failedPrintCost = (failedPrintPercentage * (materialCost + printCost + electricityCost)) + (materialCost + printCost + electricityCost);
     double taxCost = (materialCost + printCost + electricityCost) * (taxPercentage / 100);
+    double processingCost = postProcessing;
 
-    return materialCost + printCost + electricityCost + labourCost + equipmentCost + wasteCost + failedPrintCost + taxCost;
+    return materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost +wasteCost + failedPrintCost + taxCost;
   }
 
   @override
@@ -153,6 +156,13 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: printerLifespanController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Printer Lifespan (years)'),
+            ),
+
+            const Text('Post-Processing Costs:'),
+            TextFormField(
+              controller: postProcessingController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Post Processing (Painting, Sanding, etc.)'),
             ),
 
             const Text('Waste Costs:'),
