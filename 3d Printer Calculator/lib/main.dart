@@ -77,6 +77,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+ String dropDownCurrency = 'ZAR'; // Default 
+  Map<String, double> exchangeRates = {
+    'ZAR': 1.0, // Default
+    'USD': 19.08, // US Dollar
+    'CAD': 13.90, // Canadian Dollar
+    'GBP': 23.79, // British Pound
+    'EUR': 20.39, // Euro
+  };
+
 
   double calculateTotalCost() {
     // Parse input values
@@ -132,8 +141,13 @@ class _MyHomePageState extends State<MyHomePage> {
     double failedPrintCost = (failedPrintPercentage/100 * (materialCost + printCost + electricityCost)) + (materialCost + printCost + electricityCost);
     double processingCost = postProcessing;
     double taxCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost;
+    double exchangeRate = exchangeRates[dropDownCurrency] ?? 1.0;
+    double totalCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost + (taxCost + (taxCost * taxPercentage/100));
 
-    return taxCost + (taxCost * taxPercentage/100);
+    
+    return totalCost * exchangeRate;
+    //return taxCost + (taxCost * taxPercentage/100);
+    //i added the taxcost to the total cost idk if that'll affect yalls calculations
   }
 
   ////
@@ -144,6 +158,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('3D Printer Calculator'),
+        actions: [
+          //Adding the drop down button to the ribbon
+          DropdownButton(value: dropDownCurrency, onChanged: (String? newValue){
+          
+            setState(() {
+              dropDownCurrency = newValue!;
+            });
+          },
+          items: exchangeRates.keys.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+
+              value: value,child: Text(value),
+
+            );
+            }).toList(),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
