@@ -86,6 +86,14 @@ class _MyHomePageState extends State<MyHomePage> {
     'EUR': 20.39, // Euro
   };
 
+  Map<String, String> currencyLabels = {
+  'ZAR': ' in Rands',
+  'USD': ' in US Dollars',
+  'CAD': ' in Canadian Dollars',
+  'GBP': ' in British Pounds',
+  'EUR': ' in Euros',
+};
+
 
   double calculateTotalCost() {
     // Parse input values
@@ -141,6 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double failedPrintCost = (failedPrintPercentage/100 * (materialCost + printCost + electricityCost)) + (materialCost + printCost + electricityCost);
     double processingCost = postProcessing;
     double taxCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost;
+
     double exchangeRate = exchangeRates[dropDownCurrency] ?? 1.0;
     double totalCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost + (taxCost + (taxCost * taxPercentage/100));
 
@@ -160,7 +169,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('3D Printer Calculator'),
         actions: [
           //Adding the drop down button to the ribbon
-          DropdownButton(value: dropDownCurrency, onChanged: (String? newValue){
+          DropdownButton(
+            value: dropDownCurrency, 
+            onChanged: (String? newValue){
           
             setState(() {
               dropDownCurrency = newValue!;
@@ -190,8 +201,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                   LengthLimitingTextInputFormatter(8)
                 ],
-                decoration: const InputDecoration(
-                  labelText: 'Filament Cost per Reel',
+
+                decoration: /*const*/ InputDecoration(
+                  labelText: 'Filament Cost per Reel'+  currencyLabels[dropDownCurrency].toString(),
                 ),
               ),
               TextFormField(
@@ -293,8 +305,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                   LengthLimitingTextInputFormatter(8)
                 ],
-                decoration: const InputDecoration(
-                  labelText: 'Print Price per Hour',
+                decoration:  InputDecoration(
+                  labelText: 'Print Price per Hour' +  currencyLabels[dropDownCurrency].toString(),
                 ),
               ),
 
@@ -334,8 +346,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                         LengthLimitingTextInputFormatter(8)
                       ],
-                      decoration: const InputDecoration(
-                        labelText: 'Cost per kWh',
+                      decoration: InputDecoration(
+                        labelText: 'Cost per kWh' +  currencyLabels[dropDownCurrency].toString(),
                       ),
                     ),
                     Row(
@@ -419,8 +431,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                   LengthLimitingTextInputFormatter(8)
                 ],
-                decoration: const InputDecoration(
-                  labelText: 'Labour Rate per Hour',
+                decoration:  InputDecoration(
+                  labelText: 'Labour Rate per Hour'+  currencyLabels[dropDownCurrency].toString(),
                 ),
               ),
 
@@ -428,7 +440,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Equipment Costs:'),
+                  Text('Equipment Costs'+  currencyLabels[dropDownCurrency].toString()),
                   Row(
                     children: [
                       const Text('Count Equipment?'),
@@ -450,8 +462,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                         LengthLimitingTextInputFormatter(8)
                       ],
-                      decoration: const InputDecoration(
-                        labelText: 'Printer Purchase Price',
+                      decoration:  InputDecoration(
+                        labelText: 'Printer Purchase Price'+  currencyLabels[dropDownCurrency].toString(),
                       ),
                     ),
                     TextFormField(
@@ -461,8 +473,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                         LengthLimitingTextInputFormatter(8)
                       ],
-                      decoration: const InputDecoration(
-                        labelText: 'Printer Upgrades Price',
+                      decoration:  InputDecoration(
+                        labelText: 'Printer Upgrades Price'+  currencyLabels[dropDownCurrency].toString(),
                       ),
                     ),
                     TextFormField(
@@ -472,8 +484,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                         LengthLimitingTextInputFormatter(8)
                       ],
-                      decoration: const InputDecoration(
-                        labelText: 'Annual Repair Costs',
+                      decoration:  InputDecoration(
+                        labelText: 'Annual Repair Costs' +  currencyLabels[dropDownCurrency].toString(),
                       ),
                     ),
                     Row(
@@ -531,11 +543,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                   LengthLimitingTextInputFormatter(8)
                 ],
-                decoration: const InputDecoration(
-                  labelText: 'Post Processing (Painting, Sanding, etc.)',
+                decoration:  InputDecoration(
+                  labelText: 'Post Processing (Painting, Sanding, etc.)'+  currencyLabels[dropDownCurrency].toString(),
                 ),
               ),
-              const Text('Waste Costs:'),
+               Text('Waste Costs'+  currencyLabels[dropDownCurrency].toString()),
               TextFormField(
                 controller: wasteWeightController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -547,7 +559,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelText: 'Weight of Waste Material (grams)',
                 ),
               ),
-              const Text('Failed Print Costs:'),
+              Text('Failed Print Costs'+  currencyLabels[dropDownCurrency].toString()),
               TextFormField(
                 controller: failedPrintPercentageController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -662,7 +674,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               Text('Total Cost: $totalCostString'),
                               const SizedBox(height: 10),
-                              Text('Material Cost Subtotal: $materialCostSubtotalString'),
+                              Text('Material Cost Subtotal'': $materialCostSubtotalString'),
                               Text('Print Cost Subtotal: $printCostSubtotalString'),
                               Text('Electricity Cost Subtotal: $electricityCostSubtotalString'),
                               Text('Labour Cost Subtotal: $labourCostSubtotalString'),
