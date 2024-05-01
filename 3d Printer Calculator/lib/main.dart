@@ -617,35 +617,45 @@ class _MyHomePageState extends State<MyHomePage> {
                     double filamentCost = double.tryParse(filamentCostController.text) ?? 0;
                     double filamentWeight = double.tryParse(filamentWeightController.text) ?? 0;
                     double filamentUsed = double.tryParse(filamentUsedController.text) ?? 0;
-                    double printTime = double.tryParse(printTimeHoursController.text) ?? 0;
+                    double printTimeHours = double.tryParse(printTimeHoursController.text) ?? 0;
+                    double printTimeDays = double.tryParse(printTimeDaysController.text) ?? 0;
+                    double printTimeMinutes = double.tryParse(printTimeMinutesController.text) ?? 0;
                     double printPricePerHour = double.tryParse(printPricePerHourController.text) ?? 0;
                     double powerConsumption = double.tryParse(powerConsumptionController.text) ?? 0;
                     double costPerKWh = double.tryParse(costPerKWhController.text) ?? 0;
-                    double labourTime = double.tryParse(labourTimeHoursController.text) ?? 0;
+                    double labourTimeHours = double.tryParse(labourTimeHoursController.text) ?? 0;
+                    double labourTimeDays = double.tryParse(labourTimeDaysController.text) ?? 0;
+                    double labourTimeMinutes = double.tryParse(labourTimeMinutesController.text) ?? 0;
                     double labourRate = double.tryParse(labourRateController.text) ?? 0;
                     double purchasePrice = double.tryParse(purchasePriceController.text) ?? 0;
                     double upgradesPrice = double.tryParse(upgradesPriceController.text) ?? 0;
                     double annualRepairCosts = double.tryParse(annualRepairCostsController.text) ?? 0;
-                    double printerLifespan = double.tryParse(lifespanYearsController.text) ?? 0;
                     double postProcessing = double.tryParse(postProcessingController.text) ?? 0;
                     double wasteWeight = double.tryParse(wasteWeightController.text) ?? 0;
                     double failedPrintPercentage = double.tryParse(failedPrintPercentageController.text) ?? 0;
                     double taxPercentage = double.tryParse(taxPercentageController.text) ?? 0;
                     double materialProfitMargin = addMaterialProfitMargin ? (double.tryParse(materialProfitMarginController.text) ?? 0) : 0;
                     double electricityProfitMargin = addElectricityProfitMargin ? (double.tryParse(electricityProfitMarginController.text) ?? 0) : 0;
+                    double lifespanYears = double.parse(lifespanYearsController.text);
+                    double lifespanMonths = double.parse(lifespanMonthsController.text);
+                    double lifespanDays = double.parse(lifespanDaysController.text);
 
                     double materialCostSubtotal = (filamentUsed * (filamentCost / filamentWeight)) + ((filamentUsed * (filamentCost / filamentWeight)) * materialProfitMargin/100);
                     String materialCostSubtotalString = materialCostSubtotal.toStringAsFixed(3);
 
+                    double printTime = ((printTimeDays*24) + printTimeHours + (printTimeMinutes/60));
                     double printCostSubtotal = printTime * printPricePerHour;
                     String printCostSubtotalString = printCostSubtotal.toStringAsFixed(3);
 
                     double electricityCostSubtotal = ((powerConsumption/1000) * printTime * costPerKWh) + (((powerConsumption/1000) * printTime * costPerKWh)* electricityProfitMargin/100);
                     String electricityCostSubtotalString = electricityCostSubtotal.toStringAsFixed(3);
 
+                    double labourTime = (labourTimeDays * 24) + (labourTimeHours) + (labourTimeMinutes / 60);
                     double labourCostSubtotal = labourTime * labourRate;
                     String labourCostSubtotalString = labourCostSubtotal.toStringAsFixed(3);
 
+
+                    double printerLifespan = (lifespanYears) + (lifespanMonths / 12) + (lifespanDays / 365);
                     double equipmentCostSubtotal = (purchasePrice + upgradesPrice + annualRepairCosts) / (printerLifespan * 24 * 365);
                     String equipmentCostSubtotalString = equipmentCostSubtotal.toStringAsFixed(3);
 
