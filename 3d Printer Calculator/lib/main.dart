@@ -697,9 +697,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     double taxPercentage = double.tryParse(taxPercentageController.text) ?? 0;
                     double materialProfitMargin = addMaterialProfitMargin ? (double.tryParse(materialProfitMarginController.text) ?? 0) : 0;
                     double electricityProfitMargin = addElectricityProfitMargin ? (double.tryParse(electricityProfitMarginController.text) ?? 0) : 0;
-                    double lifespanYears = double.parse(lifespanYearsController.text);
-                    double lifespanMonths = double.parse(lifespanMonthsController.text);
-                    double lifespanDays = double.parse(lifespanDaysController.text);
+                    double lifespanYears = double.tryParse(lifespanYearsController.text) ?? 0;
+                    double lifespanMonths = double.tryParse(lifespanMonthsController.text) ?? 0;
+                    double lifespanDays = double.tryParse(lifespanDaysController.text) ?? 0;
 
                     double materialCostSubtotal = (filamentUsed * (filamentCost / filamentWeight)) + ((filamentUsed * (filamentCost / filamentWeight)) * materialProfitMargin/100);
                     String materialCostSubtotalString = materialCostSubtotal.toStringAsFixed(3);
@@ -733,16 +733,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     totalCost = totalCost + (totalCost * (taxPercentage / 100));
                     String totalCostString = totalCost.toStringAsFixed(3);
 
-
-                    totalCostString = totalCost.toStringAsFixed(3);
-                    materialCostSubtotalString = materialCostSubtotal.toStringAsFixed(3);
-                    printCostSubtotalString = printCostSubtotal.toStringAsFixed(3);
-                    electricityCostSubtotalString = electricityCostSubtotal.toStringAsFixed(3);
-                    labourCostSubtotalString = labourCostSubtotal.toStringAsFixed(3);
-                    equipmentCostSubtotalString = equipmentCostSubtotal.toStringAsFixed(3);
-                    wasteCostSubtotalString = wasteCostSubtotal.toStringAsFixed(3);
-                    failedPrintCostSubtotalString = failedPrintCostSubtotal.toStringAsFixed(3);
-                    processingCostSubtotalString = processingCostSubtotal.toStringAsFixed(3);
 
                     showDialog(
                       context: context,
