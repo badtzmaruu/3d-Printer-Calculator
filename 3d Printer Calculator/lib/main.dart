@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -77,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
- String dropDownCurrency = 'ZAR'; // Default 
+ String dropDownCurrency = 'ZAR'; // Default
   Map<String, double> exchangeRates = {
     'ZAR': 1.0, // Default
     'USD': 19.08, // US Dollar
@@ -160,7 +163,52 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ////
+  String totalCostString = '';
+  String materialCostSubtotalString = '';
+  String printCostSubtotalString = '';
+  String electricityCostSubtotalString = '';
+  String labourCostSubtotalString = '';
+  String equipmentCostSubtotalString = '';
+  String wasteCostSubtotalString = '';
+  String failedPrintCostSubtotalString = '';
+  String processingCostSubtotalString = '';
 
+  // Define the generateInvoice function here
+  Future<void> generateInvoice() async {
+    final Uint8List fontData = File('fonts/Roboto-Regular.ttf').readAsBytesSync();
+    final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+
+    final pw.Document pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) => pw.Column(
+          children: <pw.Widget>[
+            pw.Header(
+              level: 0,
+              child: pw.Text('3D Printer Calculator Invoice', style: pw.TextStyle(fontSize: 24, font: ttf)),
+            ),
+            pw.Paragraph(text: 'Total Cost: $totalCostString'),
+            pw.Paragraph(text: 'Material Cost Subtotal: $materialCostSubtotalString'),
+            pw.Paragraph(text: 'Print Cost Subtotal: $printCostSubtotalString'),
+            pw.Paragraph(text: 'Electricity Cost Subtotal: $electricityCostSubtotalString'),
+            pw.Paragraph(text: 'Labour Cost Subtotal: $labourCostSubtotalString'),
+            pw.Paragraph(text: 'Equipment Cost Subtotal: $equipmentCostSubtotalString'),
+            pw.Paragraph(text: 'Waste Cost Subtotal: $wasteCostSubtotalString'),
+            pw.Paragraph(text: 'Failed Print Cost Subtotal: $failedPrintCostSubtotalString'),
+            pw.Paragraph(text: 'Processing Cost Subtotal: $processingCostSubtotalString'),
+          ],
+        ),
+      ),
+    );
+
+    // Save the PDF file
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+    final String path = '$dir/invoice.pdf';
+    final File file = File(path);
+    await file.writeAsBytes(await pdf.save());
+    Printing.sharePdf(bytes: await pdf.save(), filename: 'invoice.pdf');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -673,6 +721,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     String totalCostString = totalCost.toStringAsFixed(3);
 
 
+                    totalCostString = totalCost.toStringAsFixed(3);
+                    materialCostSubtotalString = materialCostSubtotal.toStringAsFixed(3);
+                    printCostSubtotalString = printCostSubtotal.toStringAsFixed(3);
+                    electricityCostSubtotalString = electricityCostSubtotal.toStringAsFixed(3);
+                    labourCostSubtotalString = labourCostSubtotal.toStringAsFixed(3);
+                    equipmentCostSubtotalString = equipmentCostSubtotal.toStringAsFixed(3);
+                    wasteCostSubtotalString = wasteCostSubtotal.toStringAsFixed(3);
+                    failedPrintCostSubtotalString = failedPrintCostSubtotal.toStringAsFixed(3);
+                    processingCostSubtotalString = processingCostSubtotal.toStringAsFixed(3);
+
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -682,8 +740,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Total Cost: $totalCostString'),
                               const SizedBox(height: 10),
+                              Text('Total Cost: $totalCostString'),
                               Text('Material Cost Subtotal'': $materialCostSubtotalString'),
                               Text('Print Cost Subtotal: $printCostSubtotalString'),
                               Text('Electricity Cost Subtotal: $electricityCostSubtotalString'),
@@ -701,10 +759,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               },
                               child: const Text('Close'),
                             ),
+                            TextButton(
+                              onPressed: generateInvoice,
+                              child: const Text('Generate Invoice'),
+                            ),
                           ],
                         );
                       },
                     );
+
                   },
                   child: const Text('Calculate'),
                 ),
