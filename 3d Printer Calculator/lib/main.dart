@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
     
     return totalCost * exchangeRate;
     //return taxCost + (taxCost * taxPercentage/100);
-    //i added the taxcost to the total cost idk if that'll affect yalls calculations
+    //i added the tax cost to the total cost idk if that'll affect your calculations
   }
 
   ////
@@ -660,7 +660,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Warning'),
-                            content: const Text('Please either untick the box or fill in a value.'),
+                            content: const Text('Please either uncheck the box or fill in a value.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
