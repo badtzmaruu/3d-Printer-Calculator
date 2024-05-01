@@ -82,11 +82,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
  String dropDownCurrency = 'ZAR'; // Default
   Map<String, double> exchangeRates = {
-    'ZAR': 1.0, // Default
-    'USD': 19.08, // US Dollar
-    'CAD': 13.90, // Canadian Dollar
-    'GBP': 23.79, // British Pound
-    'EUR': 20.39, // Euro
+    'ZAR': 1.0,       // Default
+    'USD': 19.08,     // US Dollar
+    'CAD': 13.90,     // Canadian Dollar
+    'GBP': 23.79,     // British Pound
+    'EUR': 20.39,     // Euro
+    'INR': 4.47,      //Indian rubble
+    'AUD': 0.082,     // Australian Dollar
+    'SGD': 0.073,     // Singaporean Dollar
+    'CHF': 0.049,     // Swiss Francs
+    'MYR': 0.253809,  // Malaysian ringgits
+    'JPY': 8.31,      //Japanese Yen
   };
 
   Map<String, String> currencyLabels = {
@@ -95,6 +101,13 @@ class _MyHomePageState extends State<MyHomePage> {
   'CAD': ' in Canadian Dollars',
   'GBP': ' in British Pounds',
   'EUR': ' in Euros',
+  'INR': ' in Indian Rupee',
+  'AUD': ' in Australian Dollar',
+  'SGD': ' in Singapore Dollar',
+  'CHF': ' in Swiss Franc',
+  'MYR': ' in Malaysian Ringgit',
+  'JPY': ' in Japanese Yen',
+
 };
 
 
@@ -251,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
 
                 decoration: /*const*/ InputDecoration(
-                  labelText: 'Filament Cost per Reel'+  currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Filament Cost per Reel,$currencyLabels[dropDownCurrency].toString()',
                 ),
               ),
               TextFormField(
@@ -354,7 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration:  InputDecoration(
-                  labelText: 'Print Price per Hour' +  currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Print Price per Hour,$currencyLabels[dropDownCurrency].toString()',
                 ),
               ),
 
@@ -395,7 +408,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration: InputDecoration(
-                        labelText: 'Cost per kWh' +  currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Cost per kWh,$currencyLabels[dropDownCurrency].toString()',
                       ),
                     ),
                     Row(
@@ -480,7 +493,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration:  InputDecoration(
-                  labelText: 'Labour Rate per Hour'+  currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Labour Rate per Hour,$currencyLabels[dropDownCurrency].toString()',
                 ),
               ),
 
@@ -488,7 +501,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Equipment Costs'+  currencyLabels[dropDownCurrency].toString()),
+                  Text('Equipment Costs,$currencyLabels[dropDownCurrency].toString()'),
                   Row(
                     children: [
                       const Text('Count Equipment?'),
@@ -511,7 +524,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration:  InputDecoration(
-                        labelText: 'Printer Purchase Price'+  currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Printer Purchase Price,$currencyLabels[dropDownCurrency].toString()',
                       ),
                     ),
                     TextFormField(
@@ -522,7 +535,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration:  InputDecoration(
-                        labelText: 'Printer Upgrades Price'+  currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Printer Upgrades Price,$currencyLabels[dropDownCurrency].toString()',
                       ),
                     ),
                     TextFormField(
@@ -533,7 +546,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration:  InputDecoration(
-                        labelText: 'Annual Repair Costs' +  currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Annual Repair Costs,$currencyLabels[dropDownCurrency].toString()',
                       ),
                     ),
                     Row(
@@ -592,10 +605,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration:  InputDecoration(
-                  labelText: 'Post Processing (Painting, Sanding, etc.)'+  currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Post Processing (Painting, Sanding, etc.),$currencyLabels[dropDownCurrency].toString()',
                 ),
               ),
-               Text('Waste Costs'+  currencyLabels[dropDownCurrency].toString()),
+               Text('Waste Costs,$currencyLabels[dropDownCurrency].toString()'),
               TextFormField(
                 controller: wasteWeightController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -607,7 +620,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelText: 'Weight of Waste Material (grams)',
                 ),
               ),
-              Text('Failed Print Costs'+  currencyLabels[dropDownCurrency].toString()),
+              Text('Failed Print Costs,$currencyLabels[dropDownCurrency].toString()'),
               TextFormField(
                 controller: failedPrintPercentageController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
