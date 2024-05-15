@@ -146,6 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (addMaterialProfitMargin && materialCost > 0) {
       materialCost = (filamentUsed * (filamentCost / filamentWeight)) + ((filamentUsed * (filamentCost / filamentWeight)) * materialProfitMargin/100) ;
     }
+
+
     double printTimeInHours = (printTimeDays * 24) + (printTimeHours) + (printTimeMinutes / 60);
     double printCost = printTimeInHours * printPricePerHour;
 
@@ -188,6 +190,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Define the generateInvoice function here
   Future<void> generateInvoice() async {
+
+
+
     final Uint8List fontData = File('fonts/Roboto-Regular.ttf').readAsBytesSync();
     final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
@@ -660,7 +665,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Warning'),
-                            content: const Text('Please either uncheck the box or fill in a value.'),
+                            content: const Text('Please either un-tick the box or fill in a value.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
