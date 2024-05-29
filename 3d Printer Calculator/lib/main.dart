@@ -111,7 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
 };
 
 
-  double calculateTotalCost() {
+
+  Map<String, double> calculateTotalCost() {
     // Parse input values
     double filamentCost = double.parse(filamentCostController.text);
     double filamentWeight = double.parse(filamentWeightController.text);
@@ -169,28 +170,41 @@ class _MyHomePageState extends State<MyHomePage> {
     double taxCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost;
 
     double exchangeRate = exchangeRates[dropDownCurrency] ?? 1.0;
-    double totalCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost + (taxCost + (taxCost * taxPercentage/100));
+    double totalCost =0;
+    totalCost = materialCost + printCost + electricityCost + labourCost + equipmentCost + processingCost + wasteCost + failedPrintCost + (taxCost + (taxCost * taxPercentage/100));
 
-    
-    return totalCost * exchangeRate;
-    //return taxCost + (taxCost * taxPercentage/100);
-    //i added the tax cost to the total cost idk if that'll affect your calculations
+
+    return {
+      'totalCost': totalCost * exchangeRate,
+      'materialCost': materialCost,
+      'printCost': printCost,
+      'electricityCost': electricityCost,
+      'labourCost': labourCost,
+      'equipmentCost': equipmentCost,
+      'wasteCost': wasteCost,
+      'failedPrintCost': failedPrintCost,
+      'processingCost': processingCost,
+    };
   }
 
-  ////
-  String totalCostString = '';
-  String materialCostSubtotalString = '';
-  String printCostSubtotalString = '';
-  String electricityCostSubtotalString = '';
-  String labourCostSubtotalString = '';
-  String equipmentCostSubtotalString = '';
-  String wasteCostSubtotalString = '';
-  String failedPrintCostSubtotalString = '';
-  String processingCostSubtotalString = '';
+  void updateCostStrings(){
+    Map<String, double> costs = calculateTotalCost();
+
+    var totalCostString = costs['totalCost'].toString();
+    var materialCostSubtotalString = costs['materialCost'].toString();
+    var printCostSubtotalString = costs['printCost'].toString();
+    var electricityCostSubtotalString = costs['electricityCost'].toString();
+    var labourCostSubtotalString = costs['labourCost'].toString();
+    var equipmentCostSubtotalString = costs['equipmentCost'].toString();
+    var wasteCostSubtotalString = costs['wasteCost'].toString();
+    var failedPrintCostSubtotalString = costs['failedPrintCost'].toString();
+    var processingCostSubtotalString = costs['processingCost'].toString();
+
+  }
 
   // Define the generateInvoice function here
   Future<void> generateInvoice() async {
-
+    updateCostStrings();
 
 
     final Uint8List fontData = File('fonts/Roboto-Regular.ttf').readAsBytesSync();
