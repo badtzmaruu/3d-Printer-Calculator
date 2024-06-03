@@ -43,23 +43,23 @@ class CalculatedCostType {
   String processingCostSubtotalString = '';
 
   void updateCostStrings(Map<String, double> costs) {
-    totalCostString = 'R ' + (costs['totalCost']?.toStringAsFixed(2) ?? '0.00');
+    totalCostString = 'R ${costs['totalCost']?.toStringAsFixed(2) ?? '0.00'}';
     materialCostSubtotalString =
-        'R ' + (costs['materialCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['materialCost']?.toStringAsFixed(2) ?? '0.00'}';
     printCostSubtotalString =
-        'R ' + (costs['printCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['printCost']?.toStringAsFixed(2) ?? '0.00'}';
     electricityCostSubtotalString =
-        'R ' + (costs['electricityCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['electricityCost']?.toStringAsFixed(2) ?? '0.00'}';
     labourCostSubtotalString =
-        'R ' + (costs['labourCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['labourCost']?.toStringAsFixed(2) ?? '0.00'}';
     equipmentCostSubtotalString =
-        'R ' + (costs['equipmentCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['equipmentCost']?.toStringAsFixed(2) ?? '0.00'}';
     wasteCostSubtotalString =
-        'R ' + (costs['wasteCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['wasteCost']?.toStringAsFixed(2) ?? '0.00'}';
     failedPrintCostSubtotalString =
-        'R ' + (costs['failedPrintCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['failedPrintCost']?.toStringAsFixed(2) ?? '0.00'}';
     processingCostSubtotalString =
-        'R ' + (costs['processingCost']?.toStringAsFixed(2) ?? '0.00');
+        'R ${costs['processingCost']?.toStringAsFixed(2) ?? '0.00'}';
   }
 }
 
@@ -278,21 +278,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: pw.Text('3D Printer Calculator Invoice',
                   style: pw.TextStyle(fontSize: 24, font: ttf)),
             ),
-            pw.Text('Total Cost: ' + costType.totalCostString),
-            pw.Text('Material Cost Subtotal: ' +
-                costType.materialCostSubtotalString),
-            pw.Text('Print Cost Subtotal: ' + costType.printCostSubtotalString),
-            pw.Text('Electricity Cost Subtotal: ' +
-                costType.electricityCostSubtotalString),
+            pw.Text('Total Cost: ${costType.totalCostString}'),
+            pw.Text('Material Cost Subtotal: ${costType.materialCostSubtotalString}'),
+            pw.Text('Print Cost Subtotal: ${costType.printCostSubtotalString}'),
+            pw.Text('Electricity Cost Subtotal: ${costType.electricityCostSubtotalString}'),
             pw.Text(
-                'Labour Cost Subtotal: ' + costType.labourCostSubtotalString),
-            pw.Text('Equipment Cost Subtotal: ' +
-                costType.equipmentCostSubtotalString),
-            pw.Text('Waste Cost Subtotal: ' + costType.wasteCostSubtotalString),
-            pw.Text('Failed Print Cost Subtotal: ' +
-                costType.failedPrintCostSubtotalString),
-            pw.Text('Processing Cost Subtotal: ' +
-                costType.processingCostSubtotalString),
+                'Labour Cost Subtotal: ${costType.labourCostSubtotalString}'),
+            pw.Text('Equipment Cost Subtotal: ${costType.equipmentCostSubtotalString}'),
+            pw.Text('Waste Cost Subtotal: ${costType.wasteCostSubtotalString}'),
+            pw.Text('Failed Print Cost Subtotal: ${costType.failedPrintCostSubtotalString}'),
+            pw.Text('Processing Cost Subtotal: ${costType.processingCostSubtotalString}'),
           ],
         ),
       ),
@@ -346,10 +341,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration: /*const*/ InputDecoration(
-                  labelText: 'Filament Cost per Reel' +
-                      currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Filament Cost per Reel${currencyLabels[dropDownCurrency]}',
                       hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
+                      hintStyle: const TextStyle(color:Colors.red),
                 ),
               ),
               TextFormField(
@@ -470,10 +464,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration: InputDecoration(
-                  labelText: 'Print Price per Hour' +
-                      currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Print Price per Hour${currencyLabels[dropDownCurrency]}',
                       hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
+                      hintStyle: const TextStyle(color:Colors.red),
                 ),
               ),
               Column(
@@ -517,10 +510,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration: InputDecoration(
-                        labelText: 'Cost per kWh' +
-                            currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Cost per kWh${currencyLabels[dropDownCurrency]}',
                             hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
+                      hintStyle: const TextStyle(color:Colors.red),
                       ),
                     ),
                     Row(
@@ -613,16 +605,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration: InputDecoration(
-                  labelText: 'Labour Rate per Hour' +
-                      currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Labour Rate per Hour${currencyLabels[dropDownCurrency]}',
                 ),
               ),
               const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Equipment Costs' +
-                      currencyLabels[dropDownCurrency].toString()),
+                  Text('Equipment Costs${currencyLabels[dropDownCurrency]}'),
                   Row(
                     children: [
                       const Text('Count Equipment?'),
@@ -646,10 +636,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration: InputDecoration(
-                        labelText: 'Printer Purchase Price' +
-                            currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Printer Purchase Price${currencyLabels[dropDownCurrency]}',
                             hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
+                      hintStyle: const TextStyle(color:Colors.red),
                       ),
                     ),
                     TextFormField(
@@ -661,10 +650,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration: InputDecoration(
-                        labelText: 'Printer Upgrades Price' +
-                            currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Printer Upgrades Price${currencyLabels[dropDownCurrency]}',
                             hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
+                      hintStyle: const TextStyle(color:Colors.red),
                       ),
                     ),
                     TextFormField(
@@ -676,10 +664,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration: InputDecoration(
-                        labelText: 'Annual Repair Costs' +
-                            currencyLabels[dropDownCurrency].toString(),
+                        labelText: 'Annual Repair Costs${currencyLabels[dropDownCurrency]}',
                             hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
+                      hintStyle: const TextStyle(color:Colors.red),
                       ),
                     ),
                     Row(
@@ -752,11 +739,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   LengthLimitingTextInputFormatter(8)
                 ],
                 decoration: InputDecoration(
-                  labelText: 'Post Processing (Painting, Sanding, etc.)' +
-                      currencyLabels[dropDownCurrency].toString(),
+                  labelText: 'Post Processing (Painting, Sanding, etc.)${currencyLabels[dropDownCurrency]}',
                 ),
               ),
-              Text('Waste Costs' + currencyLabels[dropDownCurrency].toString()),
+              Text('Waste Costs${currencyLabels[dropDownCurrency]}'),
               TextFormField(
                 controller: wasteWeightController,
                 keyboardType:
@@ -769,8 +755,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelText: 'Weight of Waste Material (grams)',
                 ),
               ),
-              Text('Failed Print Costs,' +
-                  currencyLabels[dropDownCurrency].toString()),
+              Text('Failed Print Costs,${currencyLabels[dropDownCurrency]}'),
               TextFormField(
                 controller: failedPrintPercentageController,
                 keyboardType:
