@@ -348,6 +348,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: /*const*/ InputDecoration(
                   labelText: 'Filament Cost per Reel' +
                       currencyLabels[dropDownCurrency].toString(),
+                      hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                 ),
               ),
               TextFormField(
@@ -360,6 +362,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
                 decoration: const InputDecoration(
                   labelText: 'Filament Weight (grams)',
+                  hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                 ),
               ),
               TextFormField(
@@ -372,6 +376,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
                 decoration: const InputDecoration(
                   labelText: 'Filament Used (grams)',
+                hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                 ),
               ),
               Row(
@@ -398,6 +404,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                   decoration: const InputDecoration(
                     labelText: 'Material Profit Margin (%)',
+                    hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                   ),
                 ),
               ],
@@ -415,7 +423,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration:
-                          const InputDecoration(labelText: 'Print Time Days'),
+                          const InputDecoration(labelText: 'Print Time Days',hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -430,7 +439,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration:
-                          const InputDecoration(labelText: 'Print Time Hours'),
+                          const InputDecoration(labelText: 'Print Time Hours',hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -445,7 +455,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         LengthLimitingTextInputFormatter(8)
                       ],
                       decoration: const InputDecoration(
-                          labelText: 'Print Time Minutes'),
+                          labelText: 'Print Time Minutes',hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),),
                     ),
                   ),
                 ],
@@ -461,6 +472,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: InputDecoration(
                   labelText: 'Print Price per Hour' +
                       currencyLabels[dropDownCurrency].toString(),
+                      hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                 ),
               ),
               Column(
@@ -491,6 +504,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                       decoration: const InputDecoration(
                         labelText: 'Wattage of Printer (W)',
+                        hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                       ),
                     ),
                     TextFormField(
@@ -504,6 +519,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: InputDecoration(
                         labelText: 'Cost per kWh' +
                             currencyLabels[dropDownCurrency].toString(),
+                            hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                       ),
                     ),
                     Row(
@@ -530,6 +547,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                         decoration: const InputDecoration(
                           labelText: 'Electricity Profit Percentage (%)',
+                          hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                         ),
                       ),
                     ],
@@ -629,6 +648,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: InputDecoration(
                         labelText: 'Printer Purchase Price' +
                             currencyLabels[dropDownCurrency].toString(),
+                            hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                       ),
                     ),
                     TextFormField(
@@ -642,6 +663,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: InputDecoration(
                         labelText: 'Printer Upgrades Price' +
                             currencyLabels[dropDownCurrency].toString(),
+                            hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                       ),
                     ),
                     TextFormField(
@@ -655,6 +678,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: InputDecoration(
                         labelText: 'Annual Repair Costs' +
                             currencyLabels[dropDownCurrency].toString(),
+                            hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),
                       ),
                     ),
                     Row(
@@ -671,7 +696,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               LengthLimitingTextInputFormatter(8)
                             ],
                             decoration: const InputDecoration(
-                                labelText: 'Printer Lifespan Years'),
+                                labelText: 'Printer Lifespan Years',
+                                hintText: '*',
+                                hintStyle: TextStyle(color:Colors.red),),
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -687,7 +714,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               LengthLimitingTextInputFormatter(8)
                             ],
                             decoration: const InputDecoration(
-                                labelText: 'Printer Lifespan Months'),
+                                labelText: 'Printer Lifespan Months',
+                                hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),),
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -703,7 +732,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               LengthLimitingTextInputFormatter(8)
                             ],
                             decoration: const InputDecoration(
-                                labelText: 'Printer Lifespan Days'),
+                                labelText: 'Printer Lifespan Days',
+                                hintText: '*',
+                      hintStyle: TextStyle(color:Colors.red),),
                           ),
                         ),
                       ],
