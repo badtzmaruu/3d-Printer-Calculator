@@ -63,6 +63,58 @@ class CalculatedCostType {
   }
 }
 
+class MyCustomTextField extends StatefulWidget {
+  final TextEditingController controller;
+  final String labelText;
+
+  MyCustomTextField({required this.controller, required this.labelText});
+
+  @override
+  _MyCustomTextFieldState createState() => _MyCustomTextFieldState();
+}
+
+class _MyCustomTextFieldState extends State<MyCustomTextField> {
+  bool _isRequiredFilled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_checkRequiredField);
+  }
+
+  void _checkRequiredField() {
+    setState(() {
+      _isRequiredFilled = widget.controller.text.isNotEmpty;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: widget.controller,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+        LengthLimitingTextInputFormatter(8)
+      ],
+      decoration: InputDecoration(
+        labelText: _isRequiredFilled
+            ? '${widget.labelText}'
+            : '${widget.labelText} *Required',
+        labelStyle: TextStyle(
+          color: _isRequiredFilled ? Colors.black : Colors.red,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController filamentCostController = TextEditingController();
   final TextEditingController filamentWeightController =
@@ -279,15 +331,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: pw.TextStyle(fontSize: 24, font: ttf)),
             ),
             pw.Text('Total Cost: ${costType.totalCostString}'),
-            pw.Text('Material Cost Subtotal: ${costType.materialCostSubtotalString}'),
+            pw.Text(
+                'Material Cost Subtotal: ${costType.materialCostSubtotalString}'),
             pw.Text('Print Cost Subtotal: ${costType.printCostSubtotalString}'),
-            pw.Text('Electricity Cost Subtotal: ${costType.electricityCostSubtotalString}'),
+            pw.Text(
+                'Electricity Cost Subtotal: ${costType.electricityCostSubtotalString}'),
             pw.Text(
                 'Labour Cost Subtotal: ${costType.labourCostSubtotalString}'),
-            pw.Text('Equipment Cost Subtotal: ${costType.equipmentCostSubtotalString}'),
+            pw.Text(
+                'Equipment Cost Subtotal: ${costType.equipmentCostSubtotalString}'),
             pw.Text('Waste Cost Subtotal: ${costType.wasteCostSubtotalString}'),
-            pw.Text('Failed Print Cost Subtotal: ${costType.failedPrintCostSubtotalString}'),
-            pw.Text('Processing Cost Subtotal: ${costType.processingCostSubtotalString}'),
+            pw.Text(
+                'Failed Print Cost Subtotal: ${costType.failedPrintCostSubtotalString}'),
+            pw.Text(
+                'Processing Cost Subtotal: ${costType.processingCostSubtotalString}'),
           ],
         ),
       ),
@@ -332,47 +389,18 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text('Material Costs:'),
-              TextFormField(
+              MyCustomTextField(
                 controller: filamentCostController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: /*const*/ InputDecoration(
-                  labelText: 'Filament Cost per Reel${currencyLabels[dropDownCurrency]}',
-                      hintText: '*',
-                      hintStyle: const TextStyle(color:Colors.red),
-                ),
+                labelText:
+                    'Filament Cost per Reel${currencyLabels[dropDownCurrency]}',
               ),
-              TextFormField(
+              MyCustomTextField(
                 controller: filamentWeightController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: const InputDecoration(
-                  labelText: 'Filament Weight (grams)',
-                  hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
-                ),
+                labelText: 'Filament Weight (grams)',
               ),
-              TextFormField(
+              MyCustomTextField(
                 controller: filamentUsedController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: const InputDecoration(
-                  labelText: 'Filament Used (grams)',
-                hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
-                ),
+                labelText: 'Filament Used (grams)',
               ),
               Row(
                 children: [
@@ -388,19 +416,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               if (addMaterialProfitMargin) ...[
-                TextFormField(
+                MyCustomTextField(
                   controller: materialProfitMarginController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                    LengthLimitingTextInputFormatter(8)
-                  ],
-                  decoration: const InputDecoration(
-                    labelText: 'Material Profit Margin (%)',
-                    hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
-                  ),
+                  labelText: 'Material Profit Margin (%)',
                 ),
               ],
               const Text('Print Costs:'),
@@ -408,66 +426,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: TextFormField(
+                    child: MyCustomTextField(
                       controller: printTimeDaysController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration:
-                          const InputDecoration(labelText: 'Print Time Days',hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),),
+                      labelText: 'Print Time Days',
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     flex: 1,
-                    child: TextFormField(
+                    child: MyCustomTextField(
                       controller: printTimeHoursController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration:
-                          const InputDecoration(labelText: 'Print Time Hours',hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),),
+                      labelText: 'Print Time Hours',
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     flex: 1,
-                    child: TextFormField(
+                    child: MyCustomTextField(
                       controller: printTimeMinutesController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: const InputDecoration(
-                          labelText: 'Print Time Minutes',hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),),
+                      labelText: 'Print Time Minutes',
                     ),
                   ),
                 ],
               ),
-              TextFormField(
+              MyCustomTextField(
                 controller: printPricePerHourController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Print Price per Hour${currencyLabels[dropDownCurrency]}',
-                      hintText: '*',
-                      hintStyle: const TextStyle(color:Colors.red),
-                ),
+                labelText:
+                    'Print Price per Hour${currencyLabels[dropDownCurrency]}',
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -487,33 +472,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                   if (countElectricity) ...[
-                    TextFormField(
+                    MyCustomTextField(
                       controller: powerConsumptionController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: const InputDecoration(
-                        labelText: 'Wattage of Printer (W)',
-                        hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
-                      ),
+                      labelText: 'Wattage of Printer (W)',
                     ),
-                    TextFormField(
+                    MyCustomTextField(
                       controller: costPerKWhController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: InputDecoration(
-                        labelText: 'Cost per kWh${currencyLabels[dropDownCurrency]}',
-                            hintText: '*',
-                      hintStyle: const TextStyle(color:Colors.red),
-                      ),
+                      labelText:
+                          'Cost per kWh${currencyLabels[dropDownCurrency]}',
                     ),
                     Row(
                       children: [
@@ -529,19 +495,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                     if (addElectricityProfitMargin) ...[
-                      TextFormField(
+                      MyCustomTextField(
                         controller: electricityProfitMarginController,
-                        keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                          LengthLimitingTextInputFormatter(8)
-                        ],
-                        decoration: const InputDecoration(
-                          labelText: 'Electricity Profit Percentage (%)',
-                          hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),
-                        ),
+                        labelText: 'Electricity Profit Percentage (%)',
                       ),
                     ],
                   ],
@@ -552,61 +508,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: TextFormField(
+                    child: MyCustomTextField(
                       controller: labourTimeDaysController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration:
-                          const InputDecoration(labelText: 'Labour Time Days'),
+                      labelText: 'Labour Time Days',
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     flex: 1,
-                    child: TextFormField(
+                    child: MyCustomTextField(
                       controller: labourTimeHoursController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration:
-                          const InputDecoration(labelText: 'Labour Time Hours'),
+                      labelText: 'Labour Time Hours',
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     flex: 1,
-                    child: TextFormField(
+                    child: MyCustomTextField(
                       controller: labourTimeMinutesController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: const InputDecoration(
-                          labelText: 'Labour Time Minutes'),
+                      labelText: 'Labour Time Minutes',
                     ),
                   ),
                 ],
               ),
-              TextFormField(
+              MyCustomTextField(
                 controller: labourRateController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Labour Rate per Hour${currencyLabels[dropDownCurrency]}',
-                ),
+                labelText:
+                    'Labour Rate per Hour${currencyLabels[dropDownCurrency]}',
               ),
               const SizedBox(height: 20),
               Column(
@@ -627,101 +555,44 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                   if (countEquipment) ...[
-                    TextFormField(
+                    MyCustomTextField(
                       controller: purchasePriceController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: InputDecoration(
-                        labelText: 'Printer Purchase Price${currencyLabels[dropDownCurrency]}',
-                            hintText: '*',
-                      hintStyle: const TextStyle(color:Colors.red),
-                      ),
+                      labelText:
+                          'Printer Purchase Price${currencyLabels[dropDownCurrency]}',
                     ),
-                    TextFormField(
+                    MyCustomTextField(
                       controller: upgradesPriceController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: InputDecoration(
-                        labelText: 'Printer Upgrades Price${currencyLabels[dropDownCurrency]}',
-                            hintText: '*',
-                      hintStyle: const TextStyle(color:Colors.red),
-                      ),
+                      labelText:
+                          'Printer Upgrades Price${currencyLabels[dropDownCurrency]}',
                     ),
-                    TextFormField(
+                    MyCustomTextField(
                       controller: annualRepairCostsController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                        LengthLimitingTextInputFormatter(8)
-                      ],
-                      decoration: InputDecoration(
-                        labelText: 'Annual Repair Costs${currencyLabels[dropDownCurrency]}',
-                            hintText: '*',
-                      hintStyle: const TextStyle(color:Colors.red),
-                      ),
+                      labelText:
+                          'Annual Repair Costs${currencyLabels[dropDownCurrency]}',
                     ),
                     Row(
                       children: [
                         Expanded(
                           flex: 1,
-                          child: TextFormField(
+                          child: MyCustomTextField(
                             controller: lifespanYearsController,
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]')),
-                              LengthLimitingTextInputFormatter(8)
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: 'Printer Lifespan Years',
-                                hintText: '*',
-                                hintStyle: TextStyle(color:Colors.red),),
+                            labelText: 'Printer Lifespan Years',
                           ),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
                           flex: 1,
-                          child: TextFormField(
+                          child: MyCustomTextField(
                             controller: lifespanMonthsController,
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]')),
-                              LengthLimitingTextInputFormatter(8)
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: 'Printer Lifespan Months',
-                                hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),),
+                            labelText: 'Printer Lifespan Months',
                           ),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
                           flex: 1,
-                          child: TextFormField(
+                          child: MyCustomTextField(
                             controller: lifespanDaysController,
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]')),
-                              LengthLimitingTextInputFormatter(8)
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: 'Printer Lifespan Days',
-                                hintText: '*',
-                      hintStyle: TextStyle(color:Colors.red),),
+                            labelText: 'Printer Lifespan Days',
                           ),
                         ),
                       ],
@@ -730,56 +601,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               const Text('Post-Processing Costs:'),
-              TextFormField(
+              MyCustomTextField(
                 controller: postProcessingController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Post Processing (Painting, Sanding, etc.)${currencyLabels[dropDownCurrency]}',
-                ),
+                labelText:
+                    'Post Processing (Painting, Sanding, etc.)${currencyLabels[dropDownCurrency]}',
               ),
               Text('Waste Costs${currencyLabels[dropDownCurrency]}'),
-              TextFormField(
+              MyCustomTextField(
                 controller: wasteWeightController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: const InputDecoration(
-                  labelText: 'Weight of Waste Material (grams)',
-                ),
+                labelText: 'Weight of Waste Material (grams)',
               ),
               Text('Failed Print Costs,${currencyLabels[dropDownCurrency]}'),
-              TextFormField(
+              MyCustomTextField(
                 controller: failedPrintPercentageController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: const InputDecoration(
-                  labelText: 'Percentage to Charge for Failed Print (%)',
-                ),
+                labelText: 'Percentage to Charge for Failed Print (%)',
               ),
               const Text('Tax/VAT/GST:'),
-              TextFormField(
+              MyCustomTextField(
                 controller: taxPercentageController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                  LengthLimitingTextInputFormatter(8)
-                ],
-                decoration: const InputDecoration(
-                  labelText: 'Tax/VAT/GST Percentage (%)',
-                ),
+                labelText: 'Tax/VAT/GST Percentage (%)',
               ),
               const SizedBox(height: 20),
               Center(
@@ -819,7 +659,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                       return;
                     }
-
                     double filamentCost =
                         double.tryParse(filamentCostController.text) ?? 0;
                     double filamentWeight =
