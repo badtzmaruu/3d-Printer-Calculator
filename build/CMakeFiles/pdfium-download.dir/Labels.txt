@@ -1,0 +1,14 @@
+# Target labels
+ pdfium-download
+# Source files and their labels
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/pdfium-download
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/0b90a3051210901d1d89b4011a9a087f/pdfium-download.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/e5a65a550546df73cdbe1c9029837f2e/pdfium-download-complete.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-build.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-configure.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-download.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-install.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-mkdir.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-patch.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-test.rule
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-update.rule

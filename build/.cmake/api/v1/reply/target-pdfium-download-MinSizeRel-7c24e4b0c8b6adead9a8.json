@@ -1,0 +1,147 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"ExternalProject_Add"
+		],
+		"files" : 
+		[
+			"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/ExternalProject.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 4007,
+				"parent" : 1
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "ExternalProjectTargets/pdfium-download"
+	},
+	"id" : "pdfium-download::@6890427a1f51a3e7e1df",
+	"name" : "pdfium-download",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/pdfium-download",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/0b90a3051210901d1d89b4011a9a087f/pdfium-download.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/e5a65a550546df73cdbe1c9029837f2e/pdfium-download-complete.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-build.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-configure.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-download.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-install.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-mkdir.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-patch.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-test.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/bb50a78ad00dd7313308cf52fbc46867/pdfium-download-update.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

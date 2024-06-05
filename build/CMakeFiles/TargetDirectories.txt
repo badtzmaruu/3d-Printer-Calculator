@@ -1,0 +1,3 @@
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/pdfium-download.dir
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/ALL_BUILD.dir
+C:/GitHUB/3d-Printer-Calculator/build/CMakeFiles/ZERO_CHECK.dir

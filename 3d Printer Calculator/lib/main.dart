@@ -67,7 +67,7 @@ class MyCustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
 
-  MyCustomTextField({required this.controller, required this.labelText});
+  const MyCustomTextField({super.key, required this.controller, required this.labelText});
 
   @override
   _MyCustomTextFieldState createState() => _MyCustomTextFieldState();
@@ -99,7 +99,7 @@ class _MyCustomTextFieldState extends State<MyCustomTextField> {
       ],
       decoration: InputDecoration(
         labelText: _isRequiredFilled
-            ? '${widget.labelText}'
+            ? widget.labelText
             : '${widget.labelText} *Required',
         labelStyle: TextStyle(
           color: _isRequiredFilled ? Colors.black : Colors.red,
@@ -312,7 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // Define the generateInvoice function here
-  Future<void> generateInvoice() async {
+ /* Future<void> generateInvoice() async {
     updateCostStrings();
 
     final Uint8List fontData =
@@ -347,7 +347,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 'Processing Cost Subtotal: ${costType.processingCostSubtotalString}'),
           ],
         ),
-      ),
+      ),*/
     );
 
     // Save the PDF file
@@ -357,6 +357,34 @@ class _MyHomePageState extends State<MyHomePage> {
     await file.writeAsBytes(await pdf.save());
     Printing.sharePdf(bytes: await pdf.save(), filename: 'invoice.pdf');
   }
+
+  // Define the generateCSV function
+Future<void> generateCSV() async {
+  updateCostStrings();
+
+  // Create a CSV string
+  String  csvString = 'Total Cost,${costType.totalCostString}\n';
+          csvString += 'Material Cost Subtotal,${costType.materialCostSubtotalString}\n';
+          csvString += 'Print Cost Subtotal,${costType.printCostSubtotalString}\n';
+          csvString += 'Electricity Cost Subtotal,${costType.electricityCostSubtotalString}\n';
+          csvString += 'Labour Cost Subtotal,${costType.labourCostSubtotalString}\n';
+          csvString += 'Equipment Cost Subtotal,${costType.equipmentCostSubtotalString}\n';
+          csvString += 'Waste Cost Subtotal,${costType.wasteCostSubtotalString}\n';
+          csvString += 'Failed Print Cost Subtotal,${costType.failedPrintCostSubtotalString}\n';
+          csvString += 'Processing Cost Subtotal,${costType.processingCostSubtotalString}\n';
+
+
+ // Save the CSV file
+  final String dir = (await getApplicationDocumentsDirectory()).path;
+  final String path = '$dir/calculated_values.csv';
+  final File file = File(path);
+  await file.writeAsString(csvString);
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content: Text('CSV file saved successfully!'),
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -829,6 +857,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               onPressed: generateInvoice,
                               child: const Text('Generate Invoice'),
                             ),
+                            TextButton(onPressed: generateCSV, 
+                            child: const Text('Generate CSV'))
                           ],
                         );
                       },

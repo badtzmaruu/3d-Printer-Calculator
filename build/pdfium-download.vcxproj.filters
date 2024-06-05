@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\bb50a78ad00dd7313308cf52fbc46867\pdfium-download-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\e5a65a550546df73cdbe1c9029837f2e\pdfium-download-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\0b90a3051210901d1d89b4011a9a087f\pdfium-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHUB\3d-Printer-Calculator\3d Printer Calculator\build\windows\x64\pdfium-download\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\GitHUB\3d-Printer-Calculator\build\CMakeFiles\pdfium-download" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{4A2944F8-F175-3DEC-8821-08E0188E564C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
