@@ -67,8 +67,7 @@ class MyCustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
 
-  const MyCustomTextField(
-      {super.key, required this.controller, required this.labelText});
+  MyCustomTextField({required this.controller, required this.labelText});
 
   @override
   _MyCustomTextFieldState createState() => _MyCustomTextFieldState();
@@ -76,17 +75,18 @@ class MyCustomTextField extends StatefulWidget {
 
 class _MyCustomTextFieldState extends State<MyCustomTextField> {
   bool _isRequiredFilled = false;
+  late VoidCallback _listener;
 
   @override
   void initState() {
     super.initState();
-    widget.controller.addListener(_checkRequiredField);
-  }
-
-  void _checkRequiredField() {
-    setState(() {
-      _isRequiredFilled = widget.controller.text.isNotEmpty;
-    });
+    _isRequiredFilled = widget.controller.text.isNotEmpty;
+    _listener = () {
+      setState(() {
+        _isRequiredFilled = widget.controller.text.isNotEmpty;
+      });
+    };
+    widget.controller.addListener(_listener);
   }
 
   @override
@@ -100,7 +100,7 @@ class _MyCustomTextFieldState extends State<MyCustomTextField> {
       ],
       decoration: InputDecoration(
         labelText: _isRequiredFilled
-            ? widget.labelText
+            ? '${widget.labelText}'
             : '${widget.labelText} *Required',
         labelStyle: TextStyle(
           color: _isRequiredFilled ? Colors.black : Colors.red,
@@ -111,10 +111,11 @@ class _MyCustomTextFieldState extends State<MyCustomTextField> {
 
   @override
   void dispose() {
-    widget.controller.dispose();
+    widget.controller.removeListener(_listener);
     super.dispose();
   }
 }
+
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController filamentCostController = TextEditingController();
@@ -658,6 +659,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
+                    // Check the checkbox fields
                     if ((addMaterialProfitMargin &&
                             materialProfitMarginController.text.isEmpty) ||
                         (countElectricity &&
@@ -678,7 +680,43 @@ class _MyHomePageState extends State<MyHomePage> {
                           return AlertDialog(
                             title: const Text('Warning'),
                             content: const Text(
-                                'Please either un-tick the box or fill in a value.'),
+                                'Please either un-tick the box or fill in the required values.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      return;
+                    }
+                    // Check the normal fields
+                    if (filamentCostController.text.isEmpty ||
+                        filamentWeightController.text.isEmpty ||
+                        filamentUsedController.text.isEmpty ||
+                        printTimeHoursController.text.isEmpty ||
+                        printTimeDaysController.text.isEmpty ||
+                        printTimeMinutesController.text.isEmpty ||
+                        printPricePerHourController.text.isEmpty ||
+                        labourTimeHoursController.text.isEmpty ||
+                        labourTimeDaysController.text.isEmpty ||
+                        labourTimeMinutesController.text.isEmpty ||
+                        labourRateController.text.isEmpty ||
+                        postProcessingController.text.isEmpty ||
+                        wasteWeightController.text.isEmpty ||
+                        failedPrintPercentageController.text.isEmpty ||
+                        taxPercentageController.text.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Warning'),
+                            content: const Text(
+                                'Please fill in all required field values.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
