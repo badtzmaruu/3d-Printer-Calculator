@@ -1,2 +1,2 @@
 # 3d Printer Calculator
- This program calculate the price of your print regardless of location
+ This program calculates the price of your print regardless of location
